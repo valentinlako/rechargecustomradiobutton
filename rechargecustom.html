@@ -1,0 +1,97 @@
+/* recharge css */
+
+/* .main-product__block-rechargesnippet is the product form block's class, to only modify recharge's CSS on the product page */
+
+.main-product__block-rechargesnippet  {
+    margin-top: .5em!important;
+}
+.main-product__block-buy_buttons {
+    margin-top: .5em!important;
+}
+.sf__product-tab #rc_container {
+    display: none!important;
+}
+.main-product__block-rechargesnippet div.rc_block__type--active {
+    background-color: transparent;
+    display: flex;
+    justify-items: start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.main-product__block-rechargesnippet div#rc_radio_options {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.main-product__block-rechargesnippet .rc_block__type {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    row-gap: 0;
+}
+.main-product__block-rechargesnippet .rc_label {
+    display: flex!important;
+    flex-direction: row-reverse;
+    gap: 10px;
+}
+.main-product__block-rechargesnippet span.rc_label__discount {
+	  display: none;
+}
+.main-product__block-rechargesnippet div#rc_autodeliver_options {
+    width: 60%;
+    margin: 0 auto 0 10px;
+}
+.main-product__block-rechargesnippet label.rc_label.rc_label__deliver_every {
+    justify-content: flex-start;
+    flex-direction: row;
+}
+.main-product__block-rechargesnippet div.rc_popup {
+    display: none;
+}
+.main-product__block-rechargesnippet input.rc_radio {
+    visibility: hidden;
+}
+.main-product__block-rechargesnippet #rc_radio_options .rc_block.rc_block__type {
+    position: relative;
+}
+.main-product__block-rechargesnippet #rc_radio_options .rc_block.rc_block__type::after {
+    content: "";
+    position: absolute;
+    left: 2.5%;
+    top: 26px;
+    transform: translate(-50%,-50%);
+    width: 25px;
+    height: 25px;
+    -webkit-box-shadow: 0px 0px 0px 1px #00426A;
+    box-shadow: 0 0 0 1px #00426A;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+.main-product__block-rechargesnippet div.rc_block__type--active::after {
+    background-color: #00426A;
+}
+.main-product__block-rechargesnippet .rc_label, .main-product__block-rechargesnippet .rc_price {
+color: #00426A!important;
+}
+@media only screen and (max-width: 678px) {
+  .main-product__block-rechargesnippet .rc_block__type {
+   gap: 10px;
+  }
+}
+
+// then, with simple Vanilla JS into the main product Liquid file (to only run when main product section is rendered) we check if we have a recharge subscription form, then we make sure that when clicking on the main options divs (which contains the pseudoselector, as we can't select the ::after pseudoselector in JS as it does not exist in DOM) we select the label.
+
+<script>
+// if we have a subscription product, assign some event listeners to be sure custom coded radio buttons are interactive when clicking on them
+  var autoDeliverDiv = document.querySelector('.rc_block__type__autodeliver');
+  if(autoDeliverDiv != 'null') {
+    autoDeliverDiv.addEventListener("click", function(){
+		document.querySelector('.rc_label__autodeliver').click();
+	})
+  }
+  var oneTimeDiv = document.querySelector('.rc_block__type__onetime');
+  if(oneTimeDiv != 'null') {
+    oneTimeDiv.addEventListener("click", function(){
+		document.querySelector('.rc_label__onetime').click();
+	})
+  }
+</script>
